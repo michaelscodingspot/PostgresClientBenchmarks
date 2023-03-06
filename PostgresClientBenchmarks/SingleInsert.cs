@@ -30,23 +30,13 @@ public class SingleInsert
 	[IterationSetup]
 	public void MyIterationSetup()
 	{
+		// Resetting table so as not to have performance issues with tables that are too big with increasing iterations
 		if (_id + 1 % 1_000_000 == 0)
 		{
-			Console.WriteLine("\n\n-------------------------------------------------Resetting table\n");
 			_postgresNpgsql.CreateTable();
 			_id = 0;
 		}
 	}
-
-	//   [Benchmark]
-	//   public void EFInsertSync()
-	//   {
-	//       for (int i = 0; i < iterations; i++)
-	//       {
-	//           _id++; _item.Id = _id;
-	//           _postgresEF.Insert(_item);
-	//       }
-	//}
 
 	[Benchmark]
 	public async Task NpgsqlInsertAsync()

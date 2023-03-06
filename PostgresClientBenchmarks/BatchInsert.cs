@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
 
 public class BatchInsert
@@ -10,9 +7,8 @@ public class BatchInsert
 	private PostgresEF _postgresEF;
 	private List<Teacher> _teachers;
     private int _id = 0;
-	//const int iterations = 5000;
-	// private Postgres _postgres;
 	const int numTeachers = 1000;
+
 
 	[GlobalSetup]
     public async Task Setup()
@@ -39,7 +35,6 @@ public class BatchInsert
 	[IterationSetup]
     public void MyIterationSetup()
     {
-        //Console.WriteLine("\n\n-------------------------------------------------Resetting table\n");
         if (_id % 1_000_000 == 0) {
             _postgresNpgsql.CreateTable();
         }
@@ -73,17 +68,5 @@ public class BatchInsert
 		await _postgresNpgsql.BulkInsertBinaryImporter(_teachers);
 		_id++;
 	}
-
-	//[Benchmark]
-	//public async Task NpgsqlInsertBinaryImporterAndTransaction()
-	//{
-	//	await _postgresNpgsql.BulkInsertBinaryFormatterAndTransaction(_teachers);
-	//	_id++;
-	//}
-
-
-
-
-
 }
 
