@@ -1,6 +1,6 @@
 using BenchmarkDotNet.Attributes;
 
-public class BatchInsert
+public class BulkInsert
 {
     private PostgresNpgsql _postgresNpgsql;
 	private PostgresDapper _postgresDapper;

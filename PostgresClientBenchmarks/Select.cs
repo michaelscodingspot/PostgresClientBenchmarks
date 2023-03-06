@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
 
-public class SingleRead
+public class Select
 {
     private PostgresNpgsql _postgresNpgsql;
 	private PostgresDapper _postgresDapper;
@@ -15,11 +15,11 @@ public class SingleRead
     {
         _postgresNpgsql = new PostgresNpgsql();
         await _postgresNpgsql.CreateTableAsync();
-        await _postgresNpgsql.CreateIndexOnSubject();
+        //await _postgresNpgsql.CreateIndexOnSubject();
         _postgresDapper = new PostgresDapper(_postgresNpgsql.GetConnection());
         _postgresEF = new PostgresEF();
 
-        int items = 100_00;
+        int items = 10_000;
         for (int i = 0; i < items; i++)
         {
             var item = Teacher.GetRandomTeacher();

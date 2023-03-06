@@ -31,26 +31,28 @@ public class SchoolContext : DbContext
     }
 }
 
+
+
 //[Table(Teacher.TableName)]
 public class Teacher : DbContext
 {
-    public const string TableName = "teachers";
+	static Random _rnd = new Random();
+
+	public const string TableName = "teachers";
 
     public static Teacher GetRandomTeacher()
     {
-        Random rnd = new Random();
-        var n = rnd.Next(1000);
+        var n = _rnd.Next(1000);
         return new Teacher("N" + n, "L" + n, "S" + n, n);
     }
 
     public Teacher(int id, string first_name, string last_name, string subject, int salary)
     {
-        throw new NotImplementedException();
-        //Id = id;
-        //FirstName = first_name;
-        //LastName = last_name;
-        //Subject = subject;
-        //Salary = salary;
+        Id = id;
+        FirstName = first_name;
+        LastName = last_name;
+        Subject = subject;
+        Salary = salary;
     }
 
 

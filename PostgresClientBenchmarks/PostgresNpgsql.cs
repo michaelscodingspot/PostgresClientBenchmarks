@@ -64,6 +64,7 @@ public class PostgresNpgsql
 		cmd.Parameters.AddWithValue("subject", teacher.Subject);
 		cmd.Parameters.AddWithValue("salary", teacher.Salary);
 		cmd.ExecuteNonQuery();
+		cmd.Parameters.Clear();
 	}
 
 	//public void InsertSyncWithId(Teacher teacher)
@@ -115,11 +116,11 @@ public class PostgresNpgsql
 		while (await reader.ReadAsync().ConfigureAwait(false))
 		{
 			result.Add(new Teacher(
-				id: (int)reader["id"],
-				first_name: reader[1] as string, // column index can be used
-				last_name: reader.GetString(2), // another syntax option
-				subject: reader["subject"] as string,
-				salary: (int)reader["salary"]));
+				id: (int)reader[0],
+				first_name: reader[1] as string,
+				last_name: reader[2] as string,
+				subject: reader[3] as string,
+				salary: (int)reader[4]));
 
 		}
 		await reader.CloseAsync().ConfigureAwait(false);
@@ -166,8 +167,6 @@ public class PostgresNpgsql
 
 			// Add more parameters and execute the command multiple times to insert multiple items in a batch
 			cmd.ExecuteNonQuery();
-
-			// Clear the parameters for the next batch
 			cmd.Parameters.Clear();
 		}
 	}
