@@ -17,7 +17,6 @@ public class PostgresEF
 		_db.Dispose();
 	}
 
-
 	public async Task Insert(Teacher teacher)
 	{
 		await _db.Teachers.AddAsync(teacher).ConfigureAwait(false);

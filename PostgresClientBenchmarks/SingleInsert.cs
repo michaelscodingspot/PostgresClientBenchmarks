@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
 
 public class SingleInsert

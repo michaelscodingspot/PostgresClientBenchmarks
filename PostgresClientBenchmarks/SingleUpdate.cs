@@ -8,7 +8,6 @@ public class SingleUpdate
     private PostgresNpgsql _postgresNpgsql;
 	private PostgresDapper _postgresDapper;
 	private PostgresEF _postgresEF;
-    // private Postgres _postgres;
     private int _postfix = 0;
 
 	[GlobalSetup]
@@ -17,7 +16,6 @@ public class SingleUpdate
         _postgresNpgsql = new PostgresNpgsql();
         await _postgresNpgsql.CreateTableAsync();
         await _postgresNpgsql.CreateIndexOnSubject();
-        await _postgresNpgsql.CreateIndexOnId();
         _postgresDapper = new PostgresDapper(_postgresNpgsql.GetConnection());
         _postgresEF = new PostgresEF();
 

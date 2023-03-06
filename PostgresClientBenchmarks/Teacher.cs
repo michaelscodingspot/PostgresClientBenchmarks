@@ -1,17 +1,15 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
-using BenchmarkDotNet.Toolchains.CoreRun;
-using Microsoft.EntityFrameworkCore;
-
-
 
 public class SchoolContext : DbContext
 {
-    public DbSet<Teacher> Teachers { get; set; }
+    private string connectionString = $"Server=localhost;Port=5432;User Id=postgres;Password=p0stgres;Database=testdb;";
+
+	public DbSet<Teacher> Teachers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql(Postgres.ConnectionString); 
+        optionsBuilder.UseNpgsql(connectionString); 
         base.OnConfiguring(optionsBuilder);
     }
 
