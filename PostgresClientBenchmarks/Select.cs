@@ -15,7 +15,7 @@ public class Select
     {
         _postgresNpgsql = new PostgresNpgsql();
         await _postgresNpgsql.CreateTableAsync();
-        //await _postgresNpgsql.CreateIndexOnSubject();
+        await _postgresNpgsql.CreateIndexOnSubject();
         _postgresDapper = new PostgresDapper(_postgresNpgsql.GetConnection());
         _postgresEF = new PostgresEF();
 

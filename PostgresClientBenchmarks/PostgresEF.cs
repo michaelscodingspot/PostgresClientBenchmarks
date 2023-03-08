@@ -10,6 +10,7 @@ public class PostgresEF
 	public PostgresEF()
 	{
 		_db = new SchoolContext();
+		_db.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 	}
 
 	~PostgresEF()
@@ -58,5 +59,13 @@ public class PostgresEF
 		var t = await _db.Teachers.FindAsync(id).ConfigureAwait(false);
 		t.LastName = newLastName;
 		await _db.SaveChangesAsync().ConfigureAwait(false);
+	}
+
+	public async Task UpdateLastNameByIdWithExecuteUpdate(int id, string newLastName)
+	{
+		var t = await _db.Teachers
+			.Where(t => t.Id== id)
+			.ExecuteUpdateAsync(t => t.SetProperty(t => t.LastName, t => newLastName))
+			.ConfigureAwait(false);
 	}
 }

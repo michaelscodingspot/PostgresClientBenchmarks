@@ -53,6 +53,13 @@ public class SingleUpdate
 		await _postgresEF.UpdateLastNameById(100, $"Smith{_postfix}").ConfigureAwait(false);
 	}
 
+	[Benchmark]
+	public async Task EFUpdateWithExecuteUpdate()
+	{
+		_postfix = (_postfix + 1) % 10000;
+		await _postgresEF.UpdateLastNameByIdWithExecuteUpdate(100, $"Smith{_postfix}").ConfigureAwait(false);
+	}
+
 
 }
 

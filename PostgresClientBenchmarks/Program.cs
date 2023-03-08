@@ -2,7 +2,7 @@
 
 Console.WriteLine("Starting");
 
-BenchmarkRunner.Run<SingleUpdate>();
+BenchmarkRunner.Run<SingleInsert>();
 
 //var pg = new SingleUpdate();
 //await pg.Setup();
